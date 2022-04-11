@@ -1,0 +1,232 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.mainheading{
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  margin-top: 10px !important;
+}
+.headline{
+  justify-content: space-around;
+}
+.image{
+  justify-content: center;
+}
+.page2heading{
+  display: contents !important;
+  justify-content: center;
+  margin-left: 10px !important;
+    width: 100vh;
+}
+.maintaskheading{
+    text-align: center;
+    justify-content: center;
+}
+.Appname{
+
+  justify-content: right;
+  display: flex;
+  align-items: right;
+}
+.Logo{
+  height: 56px;
+  width: 59px;
+
+}
+.Name{
+  color: #a25b99 !important;
+  margin-top: 5px;
+  border: 3px solid;
+  border-radius: 6px;
+  padding: 1px;
+  border-color: #46c8f7;
+ margin-left: 10px !important;
+ font-family: "monospace" ;
+}
+.details{
+  color: #a6a2a2 !important;
+}
+.centerall{
+  text-align: center;
+  }
+  .cardmain{
+  background: linear-gradient(to bottom right, #99ccff 0%, #ff66cc 85%) ;
+  margin-Left: 10px;
+  border: none !important;
+  }
+  .col-md-2 {
+  width: 26.666667% !important;
+  }
+  .WebTable{
+  text-align: center;
+  width: 71rem;
+  }
+  .tablebody{
+  margin-top: 2px;
+  }
+  .cardshape{
+    width: 20rem;
+    height: 8rem;
+  }
+  .Menu{
+    cursor: pointer !important;
+    height: 15px !important;
+  }
+  .Cardtext{
+    
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 0px !important ;
+  margin-left: 0px !important;
+} 
+.detailheading{
+  justify-content: center !important;
+}
+.container {
+  position: relative;
+  display: inline-block;
+}
+.button {
+  padding: 0;
+  width: 50px;
+  border: 0;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  outline: 0;
+  font-size: 40px;
+}
+.dropdown-menu {
+ 
+  width: 83vh !important;
+  position: absolute;
+    inset:0px !important; 
+    transform: 0px !important;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  padding: 8px 12px;
+}
+
+li:hover {
+  background-color: rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+.main{
+  /* padding: 20px; */
+}
+.popup-content {
+
+  top: 415.327px !important;
+  left: 515px !important;
+}
+.col-md-3{
+  display: flex;
+  justify-content: space-evenly;
+}
+.profile{
+  width: 80px;
+}
+.commentsdata{
+  margin-left: 10px !important;
+}
+.sendbtn{
+  cursor: pointer;
+  margin-left: 10px;
+  width: 30px;
+}
+.inputbar{
+  height: 35px;
+  width: 700px;
+  border-radius: 20px;
+   border: none;
+  background-color: #d3d3d3;
+}
+.inputstyle{
+   position: absolute;
+    bottom: 14px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+}
+.cardbox{
+  width: 32rem;
+  height: 4rem;
+}
+.msgtext{
+  padding: 5px;
+  background-color: #3ddf7aba;
+  border: 2px solid grey;
+  border-radius: 5px;
+}
+.msgrow{
+  display: inline-grid;
+    justify-items: end;
+    justify-content: end;
+    float: right;
+}
+.background{
+  color:#25bcf3
+}
+.loginbar{
+  padding: 0px 50px 
+}
+.Cardtext{
+  color: black;
+}
+.cardtext{
+  color: black;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.navbar-collapse{
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.navbarrow{
+  padding: 0px !important;
+}
