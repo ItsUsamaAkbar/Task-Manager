@@ -38,33 +38,6 @@ function Login() {
     firebaseApp.auth().signOut();
   }
 
-  useEffect(() => {
-    if ('' !== id) {
-      getTodo();
-    }
-  }, [id]);
-
-  function getTodo() {
-    console.log('getTodo Called!');
-    db.collection('users')
-      .doc(id)
-      .collection('Task')
-      .onSnapshot(function (querySnapshot) {
-        //uselist(
-        let x = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          Name: doc.data().Name,
-          StartDate: doc.data().StartDate,
-          EndDate: doc.data().EndDate,
-          Discription: doc.data().Discription,
-          inProgress: doc.data().inProgress,
-        }));
-        setList(x);
-        // );
-        console.log(list);
-      });
-  }
-
   function clearInput() {
     setEmail('');
     setPassword('');
@@ -130,6 +103,33 @@ function Login() {
     authListner();
     console.log('id has id', id);
   });
+
+  useEffect(() => {
+    if ('' !== id) {
+      getTodo();
+    }
+  }, [id]);
+
+  function getTodo() {
+    console.log('getTodo Called!');
+    db.collection('users')
+      .doc(id)
+      .collection('Task')
+      .onSnapshot(function (querySnapshot) {
+        //uselist(
+        let x = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          Name: doc.data().Name,
+          StartDate: doc.data().StartDate,
+          EndDate: doc.data().EndDate,
+          Discription: doc.data().Discription,
+          inProgress: doc.data().inProgress,
+        }));
+        setList(x);
+        // );
+        console.log(list);
+      });
+  }
 
   return (
     <div className="background">
