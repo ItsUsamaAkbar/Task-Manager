@@ -19,6 +19,7 @@ import {
   DropdownButton,
 } from 'react-bootstrap';
 function Document(props) {
+  console.log();
   const [_state, setState] = useState({});
   const alert = useAlert();
   const [singleDoc, setSingleDoc] = useState({});
@@ -42,48 +43,34 @@ function Document(props) {
   // }, [null]);
 
   function doc(id) {
-    db.collection('user')
+    db.collection('users')
       .doc(id)
       .collection('Task')
-      .doc()
+      .doc('L3hbiW2kmENayuDjQveB')
       .get()
       .then((Snapshot) => {
         setSingleDoc(Snapshot.data());
-        // setSingleDocDisc(Snapshot.data()['Discription']);
-        // setSingleDocName(Snapshot.data()['Name']);
-        // setSingleDocStart(Snapshot.data()['StartDate']);
-        // setSingleDocEnd(Snapshot.data()['EndDate']);
-        // setComments(Snapshot.data()['Comments']);
+        setSingleDocDisc(Snapshot.data()['Discription']);
+        setSingleDocName(Snapshot.data()['Name']);
+        setSingleDocStart(Snapshot.data()['StartDate']);
+        setSingleDocEnd(Snapshot.data()['EndDate']);
+        setComments(Snapshot.data()['Comments']);
       });
-  }
-
-  function getTodo() {
-    console.log('getTodo Called!');
-    db.collection('Task').onSnapshot(function (querySnapshot) {
-      //uselist(
-      let x = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        Name: doc.data().Name,
-        StartDate: doc.data().StartDate,
-        EndDate: doc.data().EndDate,
-        Discription: doc.data().Discription,
-        inProgress: doc.data().inProgress,
-      }));
-      setList(x);
-      // );
-      console.log(list);
-    });
   }
 
   function Update() {
     console.log('addTodo Called!');
-    db.collection('users').doc(id).collection('Task').doc().update({
-      Name: singleDocName,
-      StartDate: singleDocStart,
-      EndDate: singleDocEnd,
-      Discription: singleDocDisc,
-      inProgress: false,
-    });
+    db.collection('users')
+      .doc(id)
+      .collection('Task')
+      .doc('L3hbiW2kmENayuDjQveB')
+      .update({
+        Name: singleDocName,
+        StartDate: singleDocStart,
+        EndDate: singleDocEnd,
+        Discription: singleDocDisc,
+        inProgress: false,
+      });
     toast.info('Updated!', {
       position: 'bottom-right',
       autoClose: 1500,
@@ -93,10 +80,13 @@ function Document(props) {
       draggable: true,
       progress: undefined,
     });
-    getTodo();
   }
   function deleteDoc() {
-    db.collection('Task').doc(id).delete();
+    db.collection('users')
+      .doc(id)
+      .collection('Task')
+      .doc('L3hbiW2kmENayuDjQveB')
+      .delete();
     toast.error('Deleted!', {
       position: 'bottom-right',
       autoClose: 1500,
@@ -107,7 +97,7 @@ function Document(props) {
       progress: undefined,
     });
     setTimeout(function () {
-      window.location.href = '/Login';
+      window.location.href = `/Login?ID=${id}`;
     }, 2500);
   }
   function popup() {
