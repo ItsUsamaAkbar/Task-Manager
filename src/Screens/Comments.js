@@ -25,16 +25,28 @@ function Comments(props) {
   const [singleDoc, setSingleDoc] = useState({});
   const [input, setInput] = useState([]);
   const [list, setList] = useState([]);
+  const [namelist, setNameList] = useState([]);
   const [comments, setComments] = useState([]);
+  const [singleDocName, setSingleDocName] = useState({});
   const [id, setID] = useState('');
 
   useEffect(() => {
     setID(window.location.search.split('=')[1]);
   }, [null]);
 
-  // useEffect(() => {
-  //   doc(window.location.search.split('=')[1]);
-  // }, [null]);
+  useEffect(() => {
+    doc(window.location.search.split('=')[1]);
+  }, [null]);
+
+  function doc(id) {
+    db.collection('users')
+      .doc(id)
+      .get()
+      .then((Snapshot) => {
+        setSingleDoc(Snapshot.data());
+      });
+  }
+
   // function doc(id) {
   //   db.collection('users')
   //     .doc(id)
@@ -69,13 +81,12 @@ function Comments(props) {
       getTodo();
     }
   }, [id]);
-
   function getTodo() {
     console.log('getTodo Called!');
     db.collection('users')
       .doc(id)
       .collection('Task')
-      .doc('L3hbiW2kmENayuDjQveB')
+      .doc('4rNDuIxqjytRhJJmez5j')
       .collection('Comments')
       .onSnapshot(function (querySnapshot) {
         //uselist(
@@ -88,12 +99,13 @@ function Comments(props) {
         console.log(list);
       });
   }
+
   function addTodo() {
     console.log('addTodo Called!');
     db.collection('users')
       .doc(id)
       .collection('Task')
-      .doc('L3hbiW2kmENayuDjQveB')
+      .doc('4rNDuIxqjytRhJJmez5j')
       .collection('Comments')
       .add({
         Messages: comments,
@@ -114,7 +126,7 @@ function Comments(props) {
     <div>
       <Row style={{ display: 'flex', alignItems: 'center' }}>
         <img className="profile" src={Profile} alt="Profile"></img>
-        <h3>Username</h3>
+        <h3>{singleDoc.displayName}</h3>
       </Row>
       <Row style={{ display: 'inline-grid', float: 'right' }}>
         {list.length > 0
