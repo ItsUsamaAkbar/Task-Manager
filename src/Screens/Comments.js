@@ -26,48 +26,56 @@ function Comments(props) {
   const [input, setInput] = useState([]);
   const [list, setList] = useState([]);
   const [comments, setComments] = useState([]);
-  const [id, setID] = useState(1);
+  const [id, setID] = useState('');
 
   useEffect(() => {
     setID(window.location.search.split('=')[1]);
   }, [null]);
 
-  useEffect(() => {
-    doc(window.location.search.split('=')[1]);
-  }, [null]);
-  function doc(id) {
-    db.collection('Task')
-      .doc(id)
-      .get()
-      .then((Snapshot) => {
-        setSingleDoc(Snapshot.data());
-      });
-  }
+  // useEffect(() => {
+  //   doc(window.location.search.split('=')[1]);
+  // }, [null]);
+  // function doc(id) {
+  //   db.collection('users')
+  //     .doc(id)
+  //     .collection('Task')
+  //     .doc('L3hbiW2kmENayuDjQveB')
+  //     .collection('Comments')
+  //     .get()
+  //     .then((Snapshot) => {
+  //       setSingleDoc(Snapshot.data());
+  //     });
+  // }
 
-  //   function popup() {
-  //     db.collection("Task").doc(id).add({
-  //       Msg: comments,
-  //     });
-  //     setTimeout(function () {
-  //       window.location.href = "/Document?id=" + id;
-  //     }, 2000);
-  //     toast.success("Comment Added!", {
-  //       position: "bottom-right",
-  //       autoClose: 1000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //     });
-  //   }
+  function popup() {
+    db.collection('Task').doc(id).add({
+      Msg: comments,
+    });
+    setTimeout(function () {
+      window.location.href = '/Document?id=' + id;
+    }, 2000);
+    toast.success('Comment Added!', {
+      position: 'bottom-right',
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
   useEffect(() => {
-    getTodo();
-  }, [null]);
+    if ('' !== id) {
+      getTodo();
+    }
+  }, [id]);
+
   function getTodo() {
     console.log('getTodo Called!');
-    db.collection('Task')
-      .doc()
+    db.collection('users')
+      .doc(id)
+      .collection('Task')
+      .doc('L3hbiW2kmENayuDjQveB')
       .collection('Comments')
       .onSnapshot(function (querySnapshot) {
         //uselist(
@@ -80,14 +88,17 @@ function Comments(props) {
         console.log(list);
       });
   }
-
   function addTodo() {
     console.log('addTodo Called!');
-    db.collection('Task').doc(id).collection('Comments').add({
-      Messages: comments,
-    });
+    db.collection('users')
+      .doc(id)
+      .collection('Task')
+      .doc('L3hbiW2kmENayuDjQveB')
+      .collection('Comments')
+      .add({
+        Messages: comments,
+      });
     setInput('');
-    getTodo();
     toast.success('Comment Added!', {
       position: 'bottom-right',
       autoClose: 100,
