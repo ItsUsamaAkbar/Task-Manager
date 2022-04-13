@@ -29,13 +29,16 @@ function Comments(props) {
   const [comments, setComments] = useState([]);
   const [singleDocName, setSingleDocName] = useState({});
   const [id, setID] = useState('');
+  const [taskid, setTaskid] = useState('');
 
   useEffect(() => {
-    setID(window.location.search.split('=')[1]);
+    setID(window.location.search.split('&')[0].split('=')[1]);
+    setTaskid(window.location.search.split('&')[1].split('=')[1]);
+    console.log('In Comments id is :', id + taskid);
   }, [null]);
 
   useEffect(() => {
-    doc(window.location.search.split('=')[1]);
+    doc(window.location.search.split('&')[0].split('=')[1]);
   }, [null]);
 
   function doc(id) {
@@ -86,7 +89,7 @@ function Comments(props) {
     db.collection('users')
       .doc(id)
       .collection('Task')
-      .doc('4rNDuIxqjytRhJJmez5j')
+      .doc(taskid)
       .collection('Comments')
       .onSnapshot(function (querySnapshot) {
         //uselist(
@@ -105,7 +108,7 @@ function Comments(props) {
     db.collection('users')
       .doc(id)
       .collection('Task')
-      .doc('4rNDuIxqjytRhJJmez5j')
+      .doc(taskid)
       .collection('Comments')
       .add({
         Messages: comments,
@@ -143,28 +146,23 @@ function Comments(props) {
       </Row>
       <Row style={{ display: 'flex', justifyContent: 'center' }}>
         <Row className="inputstyle">
-          <Col md={7}>
-            {' '}
-            <input
-              value={comments}
-              style={{ border: 'none' }}
-              onChange={(e) => {
-                setComments(e.target.value);
-                console.log(`The Task Name is ${e.target.value}`);
-              }}
-              placeholder="Comments"
-              className="inputbar"
-            ></input>
-          </Col>
-          <Col></Col>
-          <Col style={{ marginLeft: '10px' }} md={3}>
-            <img
-              className="sendbtn"
-              onClick={addTodo}
-              src={Send}
-              alt="send"
-            ></img>
-          </Col>
+          {' '}
+          <input
+            value={comments}
+            style={{ border: 'none' }}
+            onChange={(e) => {
+              setComments(e.target.value);
+              console.log(`The Task Name is ${e.target.value}`);
+            }}
+            placeholder="Comments"
+            className="inputbar"
+          ></input>
+          <img
+            className="sendbtn"
+            onClick={addTodo}
+            src={Send}
+            alt="send"
+          ></img>
         </Row>
       </Row>
       <ToastContainer />
