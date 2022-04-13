@@ -31,22 +31,35 @@ function Document(props) {
   const [id, setID] = useState('');
   const [taskid, setTaskid] = useState('');
   const [comments, setComments] = useState({});
-  useEffect(() => {
-    setID(window.location.search.split('=')[1]);
-    console.log('id is', id);
-  }, [id]);
-  useEffect(() => {
-    doc(window.location.search.split('=')[1]);
-  }, [null]);
+
   // useEffect(() => {
+  //   setTaskid(window.location.search.split('&')[1].split('=')[1]);
+  //   console.log('Taskid is', taskid);
+  // });
+  useEffect(() => {
+    if ('' !== id) {
+      getTask();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    setID(window.location.search.split('&')[0].split('=')[1]);
+    setTaskid(window.location.search.split('&')[1].split('=')[1]);
+    console.log('ID is : ', id + taskid);
+  });
+
+  // useEffect(() => {
+  //   doc(window.location.search.split('&')[0].split('=')[1]);
+  // }, [setTaskid, setID]);
+  // // useEffect(() => {
   //   getdata();
   // }, [null]);
 
-  function doc(id) {
+  function getTask() {
     db.collection('users')
       .doc(id)
       .collection('Task')
-      .doc('L3hbiW2kmENayuDjQveB')
+      .doc(taskid)
       .get()
       .then((Snapshot) => {
         setSingleDoc(Snapshot.data());
@@ -60,17 +73,13 @@ function Document(props) {
 
   function Update() {
     console.log('addTodo Called!');
-    db.collection('users')
-      .doc(id)
-      .collection('Task')
-      .doc('L3hbiW2kmENayuDjQveB')
-      .update({
-        Name: singleDocName,
-        StartDate: singleDocStart,
-        EndDate: singleDocEnd,
-        Discription: singleDocDisc,
-        inProgress: false,
-      });
+    db.collection('users').doc(id).collection('Task').doc(taskid).update({
+      Name: singleDocName,
+      StartDate: singleDocStart,
+      EndDate: singleDocEnd,
+      Discription: singleDocDisc,
+      inProgress: false,
+    });
     toast.info('Updated!', {
       position: 'bottom-right',
       autoClose: 1500,
@@ -82,11 +91,7 @@ function Document(props) {
     });
   }
   function deleteDoc() {
-    db.collection('users')
-      .doc(id)
-      .collection('Task')
-      .doc('L3hbiW2kmENayuDjQveB')
-      .delete();
+    db.collection('users').doc(id).collection('Task').doc(taskid).delete();
     toast.error('Deleted!', {
       position: 'bottom-right',
       autoClose: 1500,
@@ -129,7 +134,7 @@ function Document(props) {
               <InputGroup style={{ width: '500px' }} className="mb-3">
                 <FormControl
                   style={{ border: 'none' }}
-                  value={singleDocName}
+                  Value={singleDocName}
                   onChange={(e) => {
                     setSingleDocName(e.target.value);
                     console.log(`The Task Name is ${e.target.value}`);
@@ -143,7 +148,7 @@ function Document(props) {
               <InputGroup style={{ width: '500px' }} className="mb-3">
                 <FormControl
                   style={{ border: 'none' }}
-                  value={singleDocStart}
+                  Value={singleDocStart}
                   onChange={(e) => {
                     setSingleDocStart(e.target.value);
                     console.log(`The Task Name is ${e.target.value}`);
@@ -157,7 +162,7 @@ function Document(props) {
               <InputGroup style={{ width: '500px' }} className="mb-3">
                 <FormControl
                   style={{ border: 'none' }}
-                  value={singleDocEnd}
+                  Value={singleDocEnd}
                   onChange={(e) => {
                     setSingleDocEnd(e.target.value);
                     console.log(`The Task Name is ${e.target.value}`);
@@ -170,7 +175,7 @@ function Document(props) {
               <h5>Discription :</h5>
               <InputGroup style={{ width: '500px' }} className="mb-3">
                 <FormControl
-                  value={singleDocDisc}
+                  Value={singleDocDisc}
                   style={{ border: 'none' }}
                   onChange={(e) => {
                     setSingleDocDisc(e.target.value);
